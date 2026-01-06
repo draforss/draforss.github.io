@@ -1,3 +1,3 @@
 function hubungi() {
-  window.open("https://wa.me/628XXXXXXXXX", "_blank");
+  window.open("https://wa.me/6285219338778", "_blank");
 }
