@@ -1,3 +1,3 @@
 function hubungi() {
-  window.open("https://wa.me/62", "_blank");
+  window.open("https://bit.ly/497MTGV");
 }
