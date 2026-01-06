@@ -1,24 +1,64 @@
-fetch('http://localhost:5000/logins')
-  .then(res => res.json())
-  .then(data => {
-    let table = `<table>
-      <tr>
-        <th>No</th>
-        <th>Username</th>
-        <th>Password</th>
-        <th>Waktu</th>
-      </tr>`;
-    data.forEach((row, i) => {
-      table += `<tr>
-        <td>${i + 1}</td>
-        <td>${row.username || ''}</td>
-        <td>${row.password || ''}</td>
-        <td>${row.time || ''}</td>
-      </tr>`;
-    });
-    table += `</table>`;
-    document.getElementById('table-container').innerHTML = table;
-  })
-  .catch(err => {
-    document.getElementById('table-container').innerHTML = "<p style='color:red'>Gagal memuat data login!</p>";
-  });
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: #f4f6f8;
+  color: #333;
+}
+
+header {
+  background: #e60000;
+  color: white;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+header button {
+  background: white;
+  color: #e60000;
+  border: none;
+  padding: 12px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 6px;
+}
+
+section {
+  padding: 30px 20px;
+  max-width: 900px;
+  margin: auto;
+}
+
+.fitur ul {
+  list-style: none;
+  padding: 0;
+}
+
+.fitur li {
+  margin: 10px 0;
+  font-size: 16px;
+}
+
+.paket {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 20px;
+}
+
+.card {
+  background: white;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+.harga {
+  color: #e60000;
+  font-weight: bold;
+}
+
+footer {
+  text-align: center;
+  padding: 20px;
+  background: #ddd;
+}
+
