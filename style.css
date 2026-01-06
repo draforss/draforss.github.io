@@ -1,63 +1,113 @@
-body {
+* {
+  box-sizing: border-box;
   margin: 0;
+  padding: 0;
   font-family: Arial, sans-serif;
+}
+
+body {
   background: #f4f6f8;
   color: #333;
 }
 
-header {
-  background: #e60000;
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #e60000, #b00000);
   color: white;
+  text-align: center;
+  padding: 60px 20px;
+}
+
+.hero h1 {
+  font-size: 48px;
+}
+
+.hero p {
+  margin: 15px 0;
+  font-size: 18px;
+}
+
+.hero button {
+  background: white;
+  color: #e60000;
+  border: none;
+  padding: 14px 28px;
+  font-size: 16px;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero button:hover {
+  transform: scale(1.05);
+}
+
+/* FITUR */
+.fitur {
   padding: 40px 20px;
   text-align: center;
 }
 
-header button {
-  background: white;
-  color: #e60000;
-  border: none;
-  padding: 12px 20px;
-  font-size: 16px;
-  cursor: pointer;
-  border-radius: 6px;
-}
-
-section {
-  padding: 30px 20px;
-  max-width: 900px;
-  margin: auto;
-}
-
-.fitur ul {
-  list-style: none;
-  padding: 0;
-}
-
-.fitur li {
-  margin: 10px 0;
-  font-size: 16px;
-}
-
-.paket {
+.fitur-box {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
+  margin-top: 30px;
+}
+
+.fitur-item {
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 5px 10px rgba(0,0,0,0.1);
+}
+
+/* PAKET */
+.paket {
+  padding: 40px 20px;
+  background: #fff;
+  text-align: center;
+}
+
+.paket-box {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 25px;
+  margin-top: 30px;
 }
 
 .card {
-  background: white;
-  padding: 20px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  background: #f9f9f9;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.1);
+  transition: 0.3s;
 }
 
-.harga {
+.card:hover {
+  transform: translateY(-8px);
+}
+
+.card span {
+  display: block;
+  margin-top: 10px;
   color: #e60000;
   font-weight: bold;
 }
 
+.best {
+  border: 2px solid #e60000;
+}
+
+/* FOOTER */
 footer {
   text-align: center;
   padding: 20px;
-  background: #ddd;
+  background: #eee;
+  font-size: 14px;
 }
+
+/* WHATSAPP FLOAT */
+.wa {
+  position: fixed;
+
