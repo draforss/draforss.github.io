@@ -1,10 +1,287 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="id">
 <head>
-  <title>Website Pertamaku</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Login DANA — Demo (untuk belajar)</title>
+  <style>
+    /* ... CSS tetap sama seperti sebelumnya ... */
+    :root{
+      --bg1: #0066d6; /* biru gelap */
+      --bg2: #00a8ff; /* biru terang */
+      --card: #ffffff;
+      --muted: #6b7280;
+      --danger: #e11d48;
+      --radius: 12px;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: linear-gradient(135deg,var(--bg1),var(--bg2));
+      min-height:100vh;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      padding:24px;
+      color:#0f172a;
+    }
+    .wrap{
+      width:100%;
+      max-width:980px;
+      display:grid;
+      grid-template-columns: 1fr 420px;
+      gap:28px;
+      align-items:center;
+    }
+    .promo{
+      color: white;
+      padding:28px;
+      border-radius:var(--radius);
+      background: linear-gradient(180deg, rgba(255,255,255,0.06), rgba(255,255,255,0.02));
+      box-shadow: 0 8px 30px rgba(2,6,23,0.4);
+    }
+    .logo{
+      display:flex;
+      gap:12px;
+      align-items:center;
+      margin-bottom:18px;
+    }
+    .logo .circle{
+      width:56px;height:56px;border-radius:50%;
+      background: linear-gradient(180deg,#00c2ff,#0077cc);
+      display:flex;align-items:center;justify-content:center;
+      font-weight:700;color:white;font-size:20px;
+      box-shadow: 0 6px 18px rgba(2,6,23,0.25);
+    }
+    .hero h1{margin:0 0 8px 0;font-size:28px;line-height:1.05}
+    .hero p{margin:0;color:rgba(255,255,255,0.9)}
+    .features{margin-top:18px;display:flex;gap:12px;flex-wrap:wrap}
+    .feature{
+      background: rgba(255,255,255,0.06);
+      padding:8px 12px;border-radius:10px;font-size:13px;
+    }
+    .card{
+      background:var(--card);
+      padding:22px;
+      border-radius:var(--radius);
+      box-shadow: 0 8px 30px rgba(2,6,23,0.12);
+    }
+    form{display:flex;flex-direction:column;gap:12px}
+    label{font-size:13px;color:var(--muted)}
+    .input{
+      width:100%;
+      padding:12px 14px;
+      border-radius:10px;
+      border:1px solid #e6e9ef;
+      font-size:15px;
+      outline:none;
+    }
+    .input:focus{box-shadow:0 4px 14px rgba(2,6,23,0.06);border-color:#b6d4ff}
+    .row{display:flex;gap:10px;align-items:center;justify-content:space-between}
+    .btn{
+      background: linear-gradient(90deg,#0077cc,#00c2ff);
+      color:white;padding:12px;border-radius:10px;border:0;font-weight:600;
+      cursor:pointer;font-size:15px;
+    }
+    .btn:active{transform:translateY(1px)}
+    .ghost{background:transparent;border:1px solid #e6e9ef;color:#0f172a}
+    .muted{color:var(--muted);font-size:13px}
+
+    .small{font-size:13px;color:var(--muted)}
+    .history{
+      margin-top:12px;border-top:1px dashed #eef2f7;padding-top:12px;
+      max-height:200px;overflow:auto;
+    }
+    table{width:100%;border-collapse:collapse;font-size:14px}
+    th,td{padding:8px 6px;text-align:left;border-bottom:1px solid #f3f6fb}
+    .right{text-align:right}
+    .danger{color:var(--danger);font-weight:600}
+    .actions{display:flex;gap:8px;justify-content:flex-end;margin-top:8px}
+    .note{font-size:12px;color:#475569;margin-top:6px}
+    @media (max-width:880px){
+      .wrap{grid-template-columns:1fr;max-width:560px}
+      .promo{order:2}
+    }
+  </style>
 </head>
 <body>
-  <h1>Halo Dunia!</h1>
-  <p>Website ini aku buat sendiri 😎</p>
+  <div class="wrap" role="main">
+    <div class="promo" aria-hidden="false">
+      <div class="logo">
+        <div class="circle">D</div>
+        <div>
+          <div style="font-weight:700;font-size:16px">DANA — Demo</div>
+          <div style="font-size:12px;color:rgba(255,255,255,0.8)">Halaman login untuk pembelajaran</div>
+        </div>
+      </div>
+
+      <div class="hero">
+        <h1>Bayar, kirim, dan kelola dompet digitalmu</h1>
+        <p>Contoh tampilan login sederhana — tidak terhubung ke server. Cocok untuk praktik HTML/CSS/JS.</p>
+      </div>
+
+      <div class="features" aria-hidden="true">
+        <div class="feature">Responsive</div>
+        <div class="feature">Simpan history (lokal)</div>
+        <div class="feature">Validasi sederhana</div>
+      </div>
+    </div>
+
+    <div class="card" aria-label="Form login">
+      <form id="loginForm" autocomplete="on" novalidate>
+        <div>
+          <label for="user">Nomor HP atau Email</label>
+          <input id="user" class="input" name="user" placeholder="0812xxxx atau contoh@domain.com" required />
+        </div>
+        <div>
+          <label for="pass">Kata Sandi</label>
+          <div style="display:flex;gap:8px;align-items:center;">
+            <input id="pass" type="password" class="input" name="password" placeholder="Masukkan kata sandi" required />
+            <button type="button" id="togglePass" class="ghost" style="padding:9px 10px;border-radius:8px">Tampil</button>
+          </div>
+        </div>
+        <div class="row">
+          <label style="display:flex;gap:8px;align-items:center">
+            <input id="remember" type="checkbox" />
+            <span class="small">Ingat saya</span>
+          </label>
+          <a href="#" id="forgot" class="small">Lupa kata sandi?</a>
+        </div>
+        <div style="display:flex;gap:10px;">
+          <button class="btn" id="btnLogin" type="submit">Masuk</button>
+          <button type="button" id="btnDemo" class="ghost">Masuk (demo)</button>
+        </div>
+        <div class="note">Catatan: ini hanya demo frontend — jangan gunakan akun asli saat mencoba.</div>
+        <div class="history" aria-live="polite">
+          <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:8px">
+            <strong>Riwayat Login (lokal)</strong>
+            <div class="actions">
+              <button type="button" id="btnExport" class="ghost">Export CSV</button>
+              <button type="button" id="btnClear" class="danger ghost">Hapus</button>
+            </div>
+          </div>
+          <div id="historyTable">
+            <!-- table injected by JS -->
+            <p class="muted">Belum ada riwayat.</p>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+  <script>
+    const userInput = document.getElementById('user');
+    const passInput = document.getElementById('pass');
+    const toggleBtn = document.getElementById('togglePass');
+    const form = document.getElementById('loginForm');
+    const historyDiv = document.getElementById('historyTable');
+    const btnClear = document.getElementById('btnClear');
+    const btnExport = document.getElementById('btnExport');
+    const btnDemo = document.getElementById('btnDemo');
+
+    const STORAGE_KEY = 'demo_login_history_v1';
+
+    function loadHistory(){
+      const raw = localStorage.getItem(STORAGE_KEY);
+      if(!raw) return [];
+      try { return JSON.parse(raw) } catch(e){ return [] }
+    }
+    function saveHistory(list){
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(list));
+    }
+    function addHistory(entry){
+      const list = loadHistory();
+      list.unshift(entry); // latest first
+      // keep last 50 only
+      saveHistory(list.slice(0,50));
+      renderHistory();
+    }
+    function renderHistory(){
+      const list = loadHistory();
+      if(!list.length){
+        historyDiv.innerHTML = '<p class="muted">Belum ada riwayat.</p>';
+        return;
+      }
+      let html = '<table><thead><tr><th>User</th><th>Password</th><th>Waktu</th><th class="right">Aksi</th></tr></thead><tbody>';
+      list.forEach((r, i) => {
+        const user = escapeHtml(r.user);
+        const pass = escapeHtml(r.password || '');
+        const when = new Date(r.time).toLocaleString();
+        html += `<tr><td>${user}</td><td>${pass}</td><td>${when}</td><td class="right"><button data-i="${i}" class="btn ghost">Hapus</button></td></tr>`;
+      });
+      html += '</tbody></table>';
+      historyDiv.innerHTML = html;
+
+      // attach delete handlers
+      historyDiv.querySelectorAll('button[data-i]').forEach(btn=>{
+        btn.addEventListener('click', (e)=>{
+          const idx = Number(btn.getAttribute('data-i'));
+          const arr = loadHistory();
+          arr.splice(idx,1);
+          saveHistory(arr);
+          renderHistory();
+        });
+      });
+    }
+
+    // small helper
+    function escapeHtml(unsafe){ return unsafe.replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c])); }
+
+    // toggle password visibility
+    toggleBtn.addEventListener('click', ()=> {
+      if(passInput.type === 'password'){ passInput.type='text'; toggleBtn.textContent = 'Sembunyikan'; }
+      else { passInput.type='password'; toggleBtn.textContent = 'Tampil'; }
+      passInput.focus();
+    });
+
+    // simulate login
+    form.addEventListener('submit', (ev) => {
+      ev.preventDefault();
+      const user = userInput.value.trim();
+      const pass = passInput.value;
+      if(!user){ alert('Masukkan nomor HP atau email.'); userInput.focus(); return; }
+      if(!pass || pass.length < 4){ alert('Masukkan kata sandi (min 4 karakter).'); passInput.focus(); return; }
+
+      // Simulasi: anggap login selalu berhasil (demo)
+      const remember = document.getElementById('remember').checked;
+      // save user dan password ke history
+      addHistory({user, password: pass, time: new Date().toISOString(), remember});
+      alert('Login berhasil (demo). Riwayat tersimpan di browser Anda.');
+      // clear password for safety
+      passInput.value = '';
+    });
+
+    // demo quick login
+    btnDemo.addEventListener('click', ()=> {
+      userInput.value = '081234567890';
+      passInput.value = 'demo1234';
+      // fire submit
+      form.requestSubmit();
+    });
+
+    // clear history
+    btnClear.addEventListener('click', ()=> {
+      if(!confirm('Hapus semua riwayat login lokal?')) return;
+      localStorage.removeItem(STORAGE_KEY);
+      renderHistory();
+    });
+
+    // export CSV of history
+    btnExport.addEventListener('click', ()=>{
+      const list = loadHistory();
+      if(!list.length){ alert('Tidak ada riwayat untuk diexport.'); return; }
+      const rows = [['user','password','time','remember']];
+      list.forEach(r=> rows.push([r.user, r.password || '', r.time, r.remember ? 'true' : 'false']));
+      const csv = rows.map(r => r.map(c => `"${String(c).replace(/"/g,'""')}"`).join(',')).join('\n');
+      const blob = new Blob([csv], {type:'text/csv'});
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement('a');
+      a.href = url; a.download = 'login_history.csv'; document.body.appendChild(a); a.click();
+      a.remove(); URL.revokeObjectURL(url);
+    });
+
+    // initial render
+    renderHistory();
+  </script>
 </body>
 </html>
